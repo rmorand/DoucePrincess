@@ -8,3 +8,6 @@
 /dataSources.local.xml
 
 *.iml
+/misc.xml
+/modules.xml
+/vcs.xml
