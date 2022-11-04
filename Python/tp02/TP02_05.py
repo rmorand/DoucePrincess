@@ -5,7 +5,7 @@ dices: list = list((0, 0, 0))
 
 
 def launch_dice(dice_value):
-    return random.randint(6, 6) if (dice_value != saved_value or saved_value == 0) else saved_value
+    return random.randint(1, 6) if (dice_value != saved_value or saved_value == 0) else saved_value
 
 
 def print_dice():
@@ -30,8 +30,7 @@ while total_score < 200:
     while user_entry != "":
         user_entry = input("Appuyer sur \"Enter\" pour lancer les dés")
     for current_round in range(1, 4):
-        for index, dice in enumerate(dices):
-            dices[index] = launch_dice(dice)
+        dices = [launch_dice(dice) for dice in dices]
         print_dice()
         if dices[0] == dices[1] == dices[2]:
             break
