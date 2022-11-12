@@ -1,4 +1,3 @@
-# Ceci est mon commentaire:
 hundred: int = 0
 ten: int = 0
 unit: int = 0
