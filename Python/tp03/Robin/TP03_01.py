@@ -11,7 +11,7 @@ def is_integer(number_to_test):
 
 
 user_str: str = ""
-while user_str is not is_integer(user_str) or int(user_str) <= 10:
+while not is_integer(user_str) or int(user_str) <= 10:
     user_str = input("Veuillez entrer un nombre plus grand que 10 : ")
     if not is_integer(user_str):
         print("Error : not an integer")
