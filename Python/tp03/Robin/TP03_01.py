@@ -16,7 +16,7 @@ while not is_integer(user_str) or int(user_str) <= 10:
     if not is_integer(user_str):
         print("Error : not an integer")
     elif int(user_str) <= 10:
-        print("le nombre " + user_str + " n'est pas plus grand que 10")
+        print("le nombre " + user_str + " n\'est pas plus grand que 10")
 nbr: str = user_str
 while int(nbr) > 10:
     nbrs: list = []
@@ -28,9 +28,9 @@ while int(nbr) > 10:
     # Hooouuuu que c'est moche ya forcement moyen de faire mieux
     print("Nouveau nombre : ", end="")
     for n in nbrs:
-        print(n, end="+" if not n == nbrs[-1] else "")
+        print(n, end="+" if n is not nbrs[-1] else "")
     print("=" + nbr)
 if int(nbr) == 1:
     print("Le nombre " + user_str + " est un nombre porte bonheur !")
 else:
-    print("Le nombre " + user_str + " n'est pas un nombre porte bonheur !")
+    print("Le nombre " + user_str + " n\'est pas un nombre porte bonheur !")
