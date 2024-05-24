@@ -18,14 +18,14 @@ public class GestionBoisson {
         System.out.println();
 
         System.out.println("------ Ventes de produits ------- \n");
-        Boisson b = new Chocolat("Chocolat",1.5, 25,"au lait");
-//        gB.servirProduit(b);
-//        gB.servirProduit(b);
-//        gB.servirProduit(b);
-//        System.out.println();
-//
-//        System.out.println("------ Affichage du Stock ------- \n");
-//        gB.afficherStock();
+        Boisson b = new Chocolat("Chocolat", 1.5, 25, "au lait");
+        gB.servirProduit(b);
+        gB.servirProduit(b);
+        gB.servirProduit(b);
+        System.out.println();
+
+        System.out.println("------ Affichage du Stock ------- \n");
+        gB.afficherStock();
 
     }
 
@@ -57,10 +57,31 @@ public class GestionBoisson {
         String affichage = "";
         for (Boisson boisson : stockMap.keySet()) {
             affichage += boisson + " : " + stockMap.get(boisson) + " unités.";
-            if (stockMap.get(boisson) < 2){
-                affichage += " /!\\ A réapprovisionner !\n\n";
-            }else{
+            if (stockMap.get(boisson) < 2) {
+                affichage += " /!\\ A réapprovisionner !";
+            }
+            if (boisson.allergie()) {
+                affichage += "\n- Contient du lactose.\n\n";
+            } else {
                 affichage += "\n\n";
+            }
+        }
+        System.out.println(affichage);
+    }
+
+
+    public void servirProduit(Boisson boissonAServir) {
+        String affichage = "";
+        Integer quantiteMiseAJour = 0;
+        for (Boisson boisson : stockMap.keySet()) {
+            if (boissonAServir.equals(boisson)) {
+                if (stockMap.get(boisson) > 0) {
+                    affichage += boisson + " servi. Santé !";
+                    quantiteMiseAJour = stockMap.get(boisson) - 1;
+                    stockMap.put(boisson, quantiteMiseAJour);
+                } else {
+                    System.out.println("Impossible de réaliser l'opération, le produit désiré n'est plus disponible.");
+                }
             }
         }
         System.out.println(affichage);
