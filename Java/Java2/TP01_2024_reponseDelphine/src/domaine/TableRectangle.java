@@ -4,7 +4,7 @@ public class TableRectangle extends Table {
     private Integer longueur;
     private Integer largeur;
 
-    public TableRectangle(String code, Integer nbPlace, String matiere, Integer longueur, Integer largeur) {
+    public TableRectangle(String code, Integer nbPlace, Matiere matiere, Integer longueur, Integer largeur) {
         super(code, nbPlace, matiere);
         this.longueur = longueur;
         this.largeur = largeur;
@@ -22,4 +22,5 @@ public class TableRectangle extends Table {
         result += " de " + this.longueur + " X " + this.largeur;
         return result;
     }
+
 }

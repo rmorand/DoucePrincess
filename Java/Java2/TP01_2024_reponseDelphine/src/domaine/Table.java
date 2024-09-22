@@ -1,12 +1,12 @@
 package domaine;
 
-public abstract class Table {
+public abstract class Table implements Comparable<Table> {
     private String code;
     private Integer nbPlace;
-    private String matiere;
+    private Matiere matiere;
 
 
-    public Table(String code, Integer nbPlace, String matiere) {
+    public Table(String code, Integer nbPlace, Matiere matiere) {
         this.code = code;
         this.nbPlace = nbPlace;
         this.matiere = matiere;
@@ -19,8 +19,13 @@ public abstract class Table {
         return result;
     }
 
-    public String getMatiere() {
+    public Matiere getMatiere() {
         return matiere;
+    }
+
+    @Override
+    public int compareTo(Table o) {
+        return this.code.compareToIgnoreCase(o.code);
     }
 
 }

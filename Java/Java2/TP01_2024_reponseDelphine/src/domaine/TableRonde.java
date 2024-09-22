@@ -3,14 +3,14 @@ package domaine;
 public class TableRonde extends Table {
     private Integer diametre;
 
-    public TableRonde(String code, Integer nbPlace, String matiere, Integer diametre) {
+    public TableRonde(String code, Integer nbPlace, Matiere matiere, Integer diametre) {
         super(code, nbPlace, matiere);
         this.diametre = diametre;
     }
 
     @Override
     public Integer surface() {
-        Integer result = (int) (Math.PI * (Math.pow((diametre /2), 2)));
+        Integer result = (int) (Math.PI * (Math.pow((diametre/2), 2)));
         return result;
     }
 
