@@ -14,7 +14,14 @@ public class TableSpeciale {
         this.bordure = bordure;
     }
 
-    public Table getTable() {
-        return table;
-    }
+   public Integer surface(){
+        return this.table.surface();
+   }
+
+   public int compareTo(){
+
+   }
+
+
+
 }

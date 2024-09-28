@@ -1,6 +1,7 @@
 package metier;
 
 import dao.Bdd;
+import domaine.Bordure;
 import domaine.Matiere;
 import domaine.Table;
 import domaine.TableSpeciale;
@@ -9,9 +10,13 @@ import java.util.*;
 
 public class GestionTable {
     private List<Table> tables;
+    private List<TableSpeciale> tablesSpeciales;
+
 
     public GestionTable() {
         this.tables = Bdd.getDatas();
+        TableSpeciale tableSpeciale = new TableSpeciale(tables.get(0), 10, 11, Bordure.ARRONDIE);
+
     }
 
 

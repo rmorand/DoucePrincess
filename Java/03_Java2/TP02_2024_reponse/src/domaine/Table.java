@@ -14,11 +14,6 @@ public abstract class Table implements Comparable<Table> {
 
     public abstract Integer surface();
 
-    public String toString() {
-        String result = this.code + ") : " + this.nbPlace +  " places, en " + this.matiere;
-        return result;
-    }
-
     public Matiere getMatiere() {
         return matiere;
     }
@@ -26,6 +21,11 @@ public abstract class Table implements Comparable<Table> {
     @Override
     public int compareTo(Table o) {
         return this.code.compareToIgnoreCase(o.code);
+    }
+
+    public String toString() {
+        String result = this.code + ") : " + this.nbPlace +  " places, en " + this.matiere;
+        return result;
     }
 
 }
