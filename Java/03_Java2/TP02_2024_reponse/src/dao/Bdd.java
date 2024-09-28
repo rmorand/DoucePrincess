@@ -4,10 +4,7 @@ import domaine.*;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringTokenizer;
+import java.util.*;
 
 
 public class Bdd {
@@ -48,12 +45,12 @@ public class Bdd {
         return data;
     }
 
-    public static List<Table> getDatas() {
-        List<Table> datas;
+    public static List<TableSpeciale> getDataTableSpeciales() {
+        List<TableSpeciale> datas;
 
         System.out.println("\n\n------Chargement des données------");
 
-        URL path = Bdd.class.getClassLoader().getResource("LstTables.csv");
+        URL path = Bdd.class.getClassLoader().getResource("LstTablesSpec.csv");
         if (path == null) {
             throw new RuntimeException("Impossible de trouver le fichier [LstTables.csv]\n Avez-vous défini un dossier ressources ?");
         }
@@ -61,19 +58,67 @@ public class Bdd {
         System.out.println(datas);
         System.out.println("\n------Chargement des données terminé------");
 
-        return loadDatas(lireCsv(path.getPath()));
+        return datas;
     }
 
-    private static List<Table> loadDatas(String[] lines) {
-        List<Table> result = new ArrayList<>();
+    private static List<TableSpeciale> loadDatas(String[] lines) {
+        List<TableSpeciale> result = new ArrayList<>();
 
         for (String line : lines) {
             String[] champs = line.split(";");
 
-            if (champs[0].startsWith("R")) {
-                result.add(new TableRectangle(champs[0], Integer.parseInt(champs[1]), findMatiere(champs[2]), Integer.parseInt(champs[3]), Integer.parseInt(champs[4])));
+            if (champs[0].endsWith("+")) {
+                if (champs[0].startsWith("R")) {
+                    result.add(
+                            new TableSpeciale(
+                                    champs[0],
+                                    Integer.parseInt(champs[1]),
+                                    findMatiere(champs[2]),
+                                    Integer.parseInt(champs[3]),
+                                    Integer.parseInt(champs[4]),
+                                    Integer.parseInt(champs[5]),
+                                    Integer.parseInt(champs[6]),
+                                    findBordure(champs[7]),
+                                    Integer.parseInt(champs[8]))
+                    );
+                } else {
+                    result.add(
+                            new TableSpeciale(
+                                    champs[0],
+                                    Integer.parseInt(champs[1]),
+                                    findMatiere(champs[2]),
+                                    Integer.parseInt(champs[3]),
+                                    Integer.parseInt(champs[4]),
+                                    Integer.parseInt(champs[5]),
+                                    findBordure(champs[6]),
+                                    Integer.parseInt(champs[7]))
+                    );
+                }
             } else {
-                result.add(new TableRonde(champs[0], Integer.parseInt(champs[1]), findMatiere(champs[2]), Integer.parseInt(champs[3])));
+                if (champs[0].startsWith("R")) {
+                    result.add(
+                            new TableSpeciale(
+                                    champs[0],
+                                    Integer.parseInt(champs[1]),
+                                    findMatiere(champs[2]),
+                                    Integer.parseInt(champs[3]),
+                                    Integer.parseInt(champs[4]),
+                                    Integer.parseInt(champs[5]),
+                                    Integer.parseInt(champs[6]),
+                                    findBordure(champs[7]))
+                    );
+                } else {
+                    result.add(
+                            new TableSpeciale(
+                                    champs[0],
+                                    Integer.parseInt(champs[1]),
+                                    findMatiere(champs[2]),
+                                    Integer.parseInt(champs[3]),
+                                    Integer.parseInt(champs[4]),
+                                    Integer.parseInt(champs[5]),
+                                    findBordure(champs[6]))
+                    );
+                }
             }
         }
 
@@ -89,8 +134,14 @@ public class Bdd {
         return Matiere.METAL;
     }
 
-
-
+    private static Bordure findBordure(String bordure) {
+        if (Objects.equals(bordure, Bordure.ARRONDIE.name())) {
+            return Bordure.ARRONDIE;
+        } else if (Objects.equals(bordure, Bordure.BISEAU.name())) {
+            return Bordure.BISEAU;
+        }
+        return Bordure.DROITE;
+    }
 
 
 }

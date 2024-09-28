@@ -1,7 +1,7 @@
 package domaine;
 
 public class TableRonde extends Table {
-    private Integer diametre;
+    private final Integer diametre;
 
     public TableRonde(String code, Integer nbPlace, Matiere matiere, Integer diametre) {
         super(code, nbPlace, matiere);
@@ -9,9 +9,8 @@ public class TableRonde extends Table {
     }
 
     @Override
-    public Integer surface() {
-        Integer result = (int) (Math.PI * (Math.pow((diametre/2), 2)));
-        return result;
+    public Integer surfaceTable() {
+        return (Integer) (int) (Math.PI * (Math.pow((diametre/2), 2)));
     }
 
     public String toString() {

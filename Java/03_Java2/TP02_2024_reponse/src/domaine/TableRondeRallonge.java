@@ -1,7 +1,7 @@
 package domaine;
 
-public class TableRondeRallonge extends TableRonde implements SurfaceTotaleMaxCalculable{
-    private Integer surfaceRallonge;
+public class TableRondeRallonge extends TableRonde implements RallongeInterface {
+    private final Integer surfaceRallonge;
 
 
     public TableRondeRallonge(String code, Integer nbPlace, Matiere matiere, Integer diametre, Integer surfaceRallonge) {
@@ -9,17 +9,8 @@ public class TableRondeRallonge extends TableRonde implements SurfaceTotaleMaxCa
         this.surfaceRallonge = surfaceRallonge;
     }
 
-
-    @Override
-    public String toString() {
-        String result = super.toString();
-        result += " avec rallonge";
-        return result;
-    }
-
     @Override
     public Integer calculeSurfaceTotaleMax() {
-        Integer surfaceTotaleMax = this.surface() + surfaceRallonge;
-        return surfaceTotaleMax;
+        return this.surfaceTable() + surfaceRallonge;
     }
 }

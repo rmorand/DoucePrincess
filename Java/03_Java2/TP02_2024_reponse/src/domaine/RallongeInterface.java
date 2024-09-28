@@ -1,5 +1,5 @@
 package domaine;
 
-public interface SurfaceTotaleMaxCalculable {
+public interface RallongeInterface {
     Integer calculeSurfaceTotaleMax();
 }

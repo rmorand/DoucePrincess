@@ -1,29 +1,27 @@
 package metier;
 
 import dao.Bdd;
-import domaine.Bordure;
 import domaine.Matiere;
-import domaine.Table;
 import domaine.TableSpeciale;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GestionTable {
-    private List<Table> tables;
-    private List<TableSpeciale> tablesSpeciales;
+
+    private final List<TableSpeciale> tableSpeciales;
 
 
     public GestionTable() {
-        this.tables = Bdd.getDatas();
-        TableSpeciale tableSpeciale = new TableSpeciale(tables.get(0), 10, 11, Bordure.ARRONDIE);
-
+        this.tableSpeciales = Bdd.getDataTableSpeciales();
     }
 
 
     public void afficherTableParMatiere(Matiere matiere) {
-        List<Table> data = new ArrayList<>();
+        List<TableSpeciale> data = new ArrayList<>();
 
-        for (Table myTable : this.tables) {
+        for (TableSpeciale myTable : this.tableSpeciales) {
             if (matiere == myTable.getMatiere()){
                 data.add(myTable);
             }
@@ -31,22 +29,17 @@ public class GestionTable {
         Collections.sort(data);
 
         System.out.println("Liste des tables en " + matiere.name() + " (triées par code) :");
-        for (Table myTable: data) {
+        for (TableSpeciale myTable: data) {
             System.out.println(myTable);
         }
     }
 
     public void afficherTableParSurface() {
 
-        Collections.sort(this.tables, new Comparator<Table>() {
-            @Override
-            public int compare(Table o1, Table o2) {
-                return o2.surface() - o1.surface();
-            }
-        });
+        this.tableSpeciales.sort(TableSpeciale::compareBySurface);
 
         System.out.println("Liste des tables triées par surface (de la plus grande à la plus petite) :");
-        for (Table myTable: this.tables) {
+        for (TableSpeciale myTable: this.tableSpeciales) {
             System.out.println(myTable);
         }
     }

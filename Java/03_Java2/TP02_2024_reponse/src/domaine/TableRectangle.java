@@ -1,8 +1,8 @@
 package domaine;
 
 public class TableRectangle extends Table {
-    private Integer longueur;
-    private Integer largeur;
+    private final Integer longueur;
+    private final Integer largeur;
 
     public TableRectangle(String code, Integer nbPlace, Matiere matiere, Integer longueur, Integer largeur) {
         super(code, nbPlace, matiere);
@@ -11,16 +11,14 @@ public class TableRectangle extends Table {
     }
 
     @Override
-    public Integer surface() {
-        Integer result = longueur * largeur;
-        return result;
+    public Integer surfaceTable() {
+        return longueur * largeur;
     }
 
     public String toString() {
-        String result = "Table rectangle (";
-        result += super.toString();
-        result += " de " + this.longueur + " X " + this.largeur;
-        return result;
+        return "Table rectangle (" +
+        super.toString() +
+        " de " + this.longueur + " X " + this.largeur;
     }
 
 }
