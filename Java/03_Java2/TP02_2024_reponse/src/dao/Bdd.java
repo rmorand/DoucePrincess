@@ -48,14 +48,14 @@ public class Bdd {
         return data;
     }
 
-    public static List<TableSpeciale> getDatas() {
-        List<TableSpeciale> datas;
+    public static List<Table> getDatas() {
+        List<Table> datas;
 
         System.out.println("\n\n------Chargement des données------");
 
-        URL path = Bdd.class.getClassLoader().getResource("LstTablesSpec.csv");
+        URL path = Bdd.class.getClassLoader().getResource("LstTables.csv");
         if (path == null) {
-            throw new RuntimeException("Impossible de trouver le fichier [LstTablesSpec.csv]\n Avez-vous défini un dossier ressources ?");
+            throw new RuntimeException("Impossible de trouver le fichier [LstTables.csv]\n Avez-vous défini un dossier ressources ?");
         }
         datas = loadDatas(lireCsv(path.getPath()));
         System.out.println(datas);
@@ -64,20 +64,17 @@ public class Bdd {
         return loadDatas(lireCsv(path.getPath()));
     }
 
-    private static List<TableSpeciale> loadDatas(String[] lines) {
-        List<TableSpeciale> result = new ArrayList<>();
+    private static List<Table> loadDatas(String[] lines) {
+        List<Table> result = new ArrayList<>();
 
         for (String line : lines) {
             String[] champs = line.split(";");
-            Table tableAAjouter;
 
             if (champs[0].startsWith("R")) {
-                tableAAjouter = new TableRectangle(champs[0], Integer.parseInt(champs[1]), findMatiere(champs[2]), Integer.parseInt(champs[3]), Integer.parseInt(champs[4]));
+                result.add(new TableRectangle(champs[0], Integer.parseInt(champs[1]), findMatiere(champs[2]), Integer.parseInt(champs[3]), Integer.parseInt(champs[4])));
             } else {
-                tableAAjouter = new TableRonde(champs[0], Integer.parseInt(champs[1]), findMatiere(champs[2]), Integer.parseInt(champs[3]));
+                result.add(new TableRonde(champs[0], Integer.parseInt(champs[1]), findMatiere(champs[2]), Integer.parseInt(champs[3])));
             }
-            result.add(new TableSpeciale(tableAAjouter, Integer.parseInt(champs[5]), Integer.parseInt(champs[6]), findBordure(champs[7])));
-
         }
 
         return result;
@@ -92,14 +89,7 @@ public class Bdd {
         return Matiere.METAL;
     }
 
-    private static Bordure findBordure(String bordure) {
-        if (Objects.equals(bordure, Bordure.DROITE.name())) {
-            return Bordure.DROITE;
-        } else if (Objects.equals(bordure, Bordure.ARRONDIE.name())) {
-            return Bordure.ARRONDIE;
-        }
-        return Bordure.BISEAU;
-    }
+
 
 
 

@@ -5,7 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        GestionTableSpeciale g = new GestionTableSpeciale();
+        GestionTable g = new GestionTable();
 
         g.afficherTableParMatiere(Matiere.BOIS);
         System.out.println("\n");
