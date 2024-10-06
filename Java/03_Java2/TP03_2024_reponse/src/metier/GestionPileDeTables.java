@@ -4,21 +4,20 @@ import dao.Bdd;
 import domaine.*;
 
 public class GestionPileDeTables {
-    // TODO: définir correctement les 2 piles nécessaires :
-    private static Object pileBois = new Object();  // TODO: ce n'est certainement pas des Object !!
-    private static Object pileAutre = new Object();
 
+    private final Pile<TableBois> pileBois = new PileTableBois();
+    private final Pile<Table> pileAutre = new PileTable();
 
     public GestionPileDeTables() {
         stockerListeTablesDansLesPiles();
         // TODO: décommenter les affichages ci-desous : (ne rien modifier, ça doit fonctionner ainsi !)
-/*      System.out.println("Surface  totale  de la pile Bois : " + pileBois.surfaceTotale());
+        System.out.println("Surface  totale  de la pile Bois : " + pileBois.surfaceTotale());
         System.out.println("Surface  totale  de l'autre pile : " + pileAutre.surfaceTotale());
         System.out.println("Table au sommet  de la pile Bois : " + pileBois.pop());
         System.out.println("Table au sommet  de l'autre pile : " + pileAutre.pop());
         System.out.println("Surface restante de la pile Bois : " + pileBois.surfaceTotale());
         System.out.println("Surface restante de l'autre pile : " + pileAutre.surfaceTotale());
-*/    }
+    }
 
     private void stockerListeTablesDansLesPiles() {
         for (String[] champs : Bdd.getDonneesDesTables()) {
@@ -34,6 +33,19 @@ public class GestionPileDeTables {
             // TODO: utiliser les champs ci-dessus pour stocker la tables sur la bonne pile (pileBois ou pileAutre) :
             // TODO: du style:   pileBois.push(uneTableEnBois);   ou   pileAutre.push(uneAutreTable);
 
+            if (arbre != null) {
+                if (longueur != -1 && largeur != -1 && diametre == -1) {
+                    this.pileBois.push(new TableRectBois(code, nbPlaces, matiere, longueur, largeur, arbre));
+                } else {
+                    this.pileBois.push(new TableRondeBois(code, nbPlaces, matiere, diametre, arbre));
+                }
+            } else {
+                if (longueur != -1 && largeur != -1 && diametre == -1) {
+                    this.pileAutre.push(new TableRect(code, nbPlaces, matiere, longueur, largeur));
+                } else {
+                    this.pileAutre.push(new TableRonde(code, nbPlaces, matiere, diametre));
+                }
+            }
         }
     }
 }

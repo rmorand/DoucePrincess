@@ -1,15 +1,15 @@
 package domaine;
 
-public class PileTable implements Pile<Table> {
-    private Table[] tables;
+public class PileTableBois implements Pile<TableBois> {
+    private TableBois[] tables;
     private int size = 0;
 
-    public PileTable() {
-        tables = new Table[5];
+    public PileTableBois() {
+        tables = new TableBois[5];
     }
 
     @Override
-    public void push(Table val) {
+    public void push(TableBois val) {
         if (size >= tables.length) {
             resize();
         }
@@ -17,7 +17,7 @@ public class PileTable implements Pile<Table> {
     }
 
     @Override
-    public Table pop() {
+    public TableBois pop() {
         return tables[--size];
     }
 
@@ -32,7 +32,7 @@ public class PileTable implements Pile<Table> {
     }
 
     private void resize() {
-        Table[] newTab = new Table[tables.length * 2];
+        TableBois[] newTab = new TableBois[tables.length * 2];
         for (int i = 0; i < tables.length; i++) {
             newTab[i] = tables[i];
         }
@@ -43,7 +43,7 @@ public class PileTable implements Pile<Table> {
         int surface = 0;
 
         for (int i = 0; i < size; i++) {
-            surface += tables[i].surface();
+            surface += ((Table)tables[i]).surface();
         }
 
         return surface;

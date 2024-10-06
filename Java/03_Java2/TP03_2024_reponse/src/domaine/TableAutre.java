@@ -1,14 +1,13 @@
 package domaine;
 
-public class TableAutre implements SurfaceCalculable {
-    Table table;
+public class TableAutre extends Table {
 
-    public boolean estEn(Matiere matiere) {
-        return true;
+    public TableAutre(String code, int nbPlaces, Matiere matiere) {
+        super(code, nbPlaces, matiere);
     }
 
     @Override
-    public Integer surface() {
-        return null;
+    public int surface() {
+        return 0;
     }
 }
