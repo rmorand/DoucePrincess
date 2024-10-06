@@ -43,4 +43,5 @@ public abstract class Table implements Comparable<Table> {
     public String toString() {
         return "(" + code + ") : " + nbPlaces + " places, en " + matiere;
     }
+
 }

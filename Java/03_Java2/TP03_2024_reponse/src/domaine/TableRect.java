@@ -19,4 +19,5 @@ public class TableRect extends Table {
     public String toString() {
         return "Table rectangle " + super.toString() + " de " + longueur + "x" + largeur;
     }
+
 }
