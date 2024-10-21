@@ -1,4 +1,7 @@
-/** 
+import Metier.DList;
+import Metier.VotreDList;
+
+/**
  * 63-31 - Structures de données : Liste doublement chaînée
  * @author Ch. Stettler - HEG-Genève
  */
