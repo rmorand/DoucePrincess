@@ -1,40 +1,104 @@
-/** 
+/**
  * Structures de données : Les Arbres n-aires
- *    Version : fils implémentés dans un ArrayList
+ * Version : fils implémentés dans un ArrayList
+ *
  * @author Ch. Stettler - HEG-Genève
  */
+
 import java.util.ArrayList;
 import java.util.List;
 
+// Version avec un ArrayList des fils
 public class ArbreN {
+	Noeud racine = null;
 
-	
+	public ArbreN(int racine) {
+		this.racine = new Noeud(racine);
+	}
 
-// ===== Définition d'un Noeud ================================================
-	
+	// ===== Définition d'un Noeud ================================================
+	public static class Noeud {
+		int valeur;
+		List<Noeud> listeFils = new ArrayList<>();
+
+		public Noeud(int val) {  // Constructeur
+			this.valeur = val;
+		}
+
+		@Override
+		public String toString() {
+			return " valeur = " + valeur;
+		}
+
+
+	}
 
 // ===== Méthodes de l'Arbre ==================================================
 
-
-
-// ===== main: test: création de l'arbre, appel des méthodes ==================
-
-	public static void main (String[] args) {
-		ArbreN a = new ArbreN(0);
-		Noeud n;
-		n = a.chercher(0);   a.inserer(1, n); a.inserer(2, n); a.inserer(3, n); a.inserer(4, n);
-		n = a.chercher(1);   a.inserer(11, n); a.inserer(12, n); a.inserer(13, n); a.inserer(14, n); 
-		n = a.chercher(12);  a.inserer(121, n); a.inserer(122, n); a.inserer(123, n); 
-		n = a.chercher(122); a.inserer(1221, n); 
-		n = a.chercher(3);   a.inserer(31, n); a.inserer(32, n); 
-		n = a.chercher(31);  a.inserer(311, n); a.inserer(312, n); a.inserer(313, n); 
-		n = a.chercher(4);   a.inserer(41, n);
-
-		a.parcoursPrefixe();  System.out.println();
-		a.parcoursPostfixe(); System.out.println();
-
-		n = a.chercher(12);
-		System.out.println("Chercher 12: " + a.chercher(12));
-		System.out.println("Taille: " + a.taille());
+	public void inserer(int val, Noeud n) {  // n = Noeud Père, val = valeur du Noeud Fils ajouté
+		n.listeFils.add(new Noeud(val));
 	}
+
+
+	public Noeud chercher(int val) {
+		return chercherRecursive(racine, val);
+	}
+
+	public Noeud chercherRecursive(Noeud n, int val) {
+		if (val == n.valeur) {
+			return n;
+		}
+		for (Noeud noeud : n.listeFils) {
+			Noeud noeudCherche = chercherRecursive(noeud, val);
+			if (noeudCherche != null) {
+				return noeudCherche;
+			}
+		}
+		return null;
+	}
+
+
+	// Parcours PREfixe
+	public void parcoursPrefixe() {
+		parcoursPrefixeRecursive(racine);
+	}
+
+	private void parcoursPrefixeRecursive(Noeud n) {
+		System.out.println(n.valeur);
+		for (Noeud noeud : n.listeFils) {
+			parcoursPrefixeRecursive(noeud);
+		}
+	}
+
+	// Parcours POSTfixe
+	public void parcoursPostfixe() {
+		parcoursPostfixeRecursive(racine);
+	}
+
+	private void parcoursPostfixeRecursive(Noeud n) {
+		for (Noeud noeud : n.listeFils) {
+			parcoursPostfixeRecursive(noeud);
+		}
+		System.out.println(n.valeur);
+	}
+
+
+	public int taille() { // retourne le nb de noeuds
+		if (racine == null) {
+			return 0;
+		}
+		return tailleRecursive(racine);
+	}
+
+	public int tailleRecursive(Noeud n) {
+		// Le nombre de noeuds commence à 1 pour inclure le noeud actuel
+		int taille = 1;
+		// Parcourir tous les fils et additionner leurs tailles
+		for (Noeud fils : n.listeFils) {
+			taille += tailleRecursive(fils);
+		}
+		return taille;
+	}
+
+
 }
