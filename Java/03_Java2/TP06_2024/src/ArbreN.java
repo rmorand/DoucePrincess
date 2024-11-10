@@ -10,26 +10,26 @@ import java.util.List;
 
 // Version avec un ArrayList des fils
 public class ArbreN {
-	Noeud racine = null;
+	private Noeud racine;
 
-	public ArbreN(int racine) {
-		this.racine = new Noeud(racine);
+	public ArbreN(int valeur) {
+		this.racine = new Noeud(valeur);
 	}
 
 	// ===== Définition d'un Noeud ================================================
 	public static class Noeud {
 		int valeur;
-		List<Noeud> listeFils = new ArrayList<>();
+		List<Noeud> listeFils;
 
 		public Noeud(int val) {  // Constructeur
 			this.valeur = val;
+			this.listeFils = new ArrayList<>();
 		}
 
 		@Override
 		public String toString() {
 			return " valeur = " + valeur;
 		}
-
 
 	}
 
@@ -83,7 +83,7 @@ public class ArbreN {
 	}
 
 
-	public int taille() { // retourne le nb de noeuds
+	public int taille() { // retourne le nb total de noeuds dans l'arbre
 		if (racine == null) {
 			return 0;
 		}
