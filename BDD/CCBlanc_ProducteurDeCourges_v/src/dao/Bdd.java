@@ -16,9 +16,9 @@ import java.util.logging.Logger;
 
 public class Bdd {
     // TODO: indiquez vos url de connexion ainsi que le mot de passe de votre base Neo4j
-    private static final String URL_MONGO = ".......";
-    private static final String URL_NEO4J = "........";
-    private static final String PWD_NEO4J = ".........";
+    private static final String URL_MONGO = "mongodb+srv://del:admin@cluster0.hj4dj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0.mongodb.net";
+    private static final String URL_NEO4J = "neo4j+s://f05e4e7d.databases.neo4j.io";
+    private static final String PWD_NEO4J = "7gjNsci2nhCQKFFxhXAo017logh0VXKQoSxhyjOGtsg";
 
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!           NE MODIFIEZ PAS LE CODE DE CETTE CLASSE           !!!!!
