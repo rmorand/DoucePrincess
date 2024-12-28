@@ -11,6 +11,17 @@ public class Application {
     public Application() {
         // Créé la connection
         this.bdd = new Bdd();
+        if (this.bdd == null || !isConnected()) {
+            System.out.println("Failed to initialize the database connection.");
+        }
+    }
+
+    private boolean isConnected() {
+        try {
+            return this.bdd.connect() != null;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     // Test de la méthode query pour exécuter une requête SELECT
